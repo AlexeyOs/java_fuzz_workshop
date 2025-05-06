@@ -15,7 +15,7 @@ docker build --tag=pdfbox_workshop_img .
 docker run -it -v "$(pwd)/artifacts:/home/fuzz/artifacts:ro" --name=pdfbox_fuzz pdfbox_workshop_img
 ```
 
-Собираем:
+Собираем проект:
 
 ``` #bash
 cd /home/fuzz/pdfbox
