@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-RUN apt-get update && apt-get install -y wget git unzip
+RUN apt-get update && apt-get install -y wget git unzip neovim
 
 # install jdk
 RUN wget https://download.oracle.com/java/22/archive/jdk-22.0.2_linux-x64_bin.tar.gz
@@ -19,8 +19,8 @@ ENV PATH="$M2_HOME/bin:$PATH"
 # clone pdfbox repository
 RUN mkdir /home/fuzz
 WORKDIR /home/fuzz
-RUN wget https://dlcdn.apache.org/pdfbox/3.0.4/pdfbox-3.0.4-src.zip
-RUN unzip pdfbox-3.0.4-src.zip && rm pdfbox-3.0.4-src.zip && mv pdfbox-3.0.4 pdfbox
+RUN git clone https://github.com/apache/pdfbox.git
+RUN cd pdfbox && git checkout 3.0.4
 
 # install jazzer
 RUN mkdir jazzer
@@ -33,9 +33,9 @@ ENV PATH="$PATH:/home/fuzz/jazzer"
 WORKDIR /home/fuzz
 RUN mkdir log4j
 WORKDIR /home/fuzz/log4j
-RUN wget https://downloads.apache.org/logging/log4j/2.24.3/apache-log4j-2.24.3-bin.zip
+RUN wget https://dlcdn.apache.org/logging/log4j/2.24.3/apache-log4j-2.24.3-bin.zip
 RUN unzip apache-log4j-2.24.3-bin.zip && rm apache-log4j-2.24.3-bin.zip
-RUN wget https://archive.apache.org/dist/commons/logging/binaries/commons-logging-1.2-bin.tar.gz
+RUN wget https://repo1.maven.org/maven2/commons-logging/commons-logging/1.2/commons-logging-1.2-bin.tar.gz
 RUN tar xf commons-logging-1.2-bin.tar.gz && rm commons-logging-1.2-bin.tar.gz
 WORKDIR /home/fuzz
 

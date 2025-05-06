@@ -5,7 +5,7 @@
 Собираем docker образ:
 
 ``` #bash
-git clone https://github.com/lenix123/java_fuzz_workshop.git && cd java_fuzz_workshop
+git clone https://github.com/saladosss/java_fuzz_workshop.git && cd java_fuzz_workshop
 docker build --tag=pdfbox_workshop_img .
 ```
 
@@ -15,31 +15,12 @@ docker build --tag=pdfbox_workshop_img .
 docker run -it -v "$(pwd)/artifacts:/home/fuzz/artifacts:ro" --name=pdfbox_fuzz pdfbox_workshop_img
 ```
 
-Применяем патч:
+Собираем:
 
 ``` #bash
 cd /home/fuzz/pdfbox
-git apply ../artifacts/pdfbox.patch
-```
-
-## Подготовка корпуса
-
-Подготавливаем входной корпус:
-
-``` #bash
-mkdir pdfbox/src/test/resources/org/apache/pdfbox/pdfparser/PDFStreamParserTestInputs
-cp /home/fuzz/artifacts/corpus/* pdfbox/src/test/resources/org/apache/pdfbox/pdfparser/PDFStreamParserTestInputs
-```
-
-Собираем тесты и запускаем фаззинг FuzzTestPDFParser:
-
-``` #bash
 mvn clean install -DskipTests
-cd /home/fuzz/pdfbox/pdfbox
-JAZZER_FUZZ=1 mvn test -Dtest=PDFStreamParserTest#FuzzTestPDFParser
 ```
-
-Наработанный корпус хранится в `/home/fuzz/pdfbox/pdfbox/.cifuzz-corpus/`
 
 ## Фаззинг java кода с помощью jazzer
 
