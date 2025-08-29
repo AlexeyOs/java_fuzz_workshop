@@ -10,10 +10,10 @@ ENV JAVA_HOME='/opt/jdk-22.0.2'
 ENV PATH="$JAVA_HOME/bin:$PATH"
 
 # install mvn
-RUN wget https://dlcdn.apache.org/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz
-RUN tar -xf apache-maven-3.9.6-bin.tar.gz && rm apache-maven-3.9.6-bin.tar.gz
-RUN mv apache-maven-3.9.6 /opt/
-ENV M2_HOME='/opt/apache-maven-3.9.6'
+RUN wget https://dlcdn.apache.org/maven/maven-3/3.9.11/binaries/apache-maven-3.9.11-bin.tar.gz
+RUN tar -xf apache-maven-3.9.11-bin.tar.gz && rm apache-maven-3.9.11-bin.tar.gz
+RUN mv apache-maven-3.9.11 /opt/
+ENV M2_HOME='/opt/apache-maven-3.9.11'
 ENV PATH="$M2_HOME/bin:$PATH"
 
 # clone pdfbox repository
@@ -33,8 +33,8 @@ ENV PATH="$PATH:/home/fuzz/jazzer"
 WORKDIR /home/fuzz
 RUN mkdir log4j
 WORKDIR /home/fuzz/log4j
-RUN wget https://dlcdn.apache.org/logging/log4j/2.24.3/apache-log4j-2.24.3-bin.zip
-RUN unzip apache-log4j-2.24.3-bin.zip && rm apache-log4j-2.24.3-bin.zip
+RUN wget https://dlcdn.apache.org/logging/log4j/2.25.1/apache-log4j-2.25.1-bin.zip
+RUN unzip apache-log4j-2.25.1-bin.zip && rm apache-log4j-2.25.1-bin.zip
 RUN wget https://repo1.maven.org/maven2/commons-logging/commons-logging/1.2/commons-logging-1.2-bin.tar.gz
 RUN tar xf commons-logging-1.2-bin.tar.gz && rm commons-logging-1.2-bin.tar.gz
 WORKDIR /home/fuzz
